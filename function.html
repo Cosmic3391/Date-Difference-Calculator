@@ -5,59 +5,81 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Date Difference Calculator</title>
     <style>
+        /* Background and general styling */
+        body {
+            margin: 0;
+            padding: 0;
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-family: 'Arial', sans-serif;
+            background: linear-gradient(135deg, #6dd5fa, #2980b9);
+        }
+
+        /* Main container styling */
         .main {
             display: flex;
             flex-direction: column;
-            max-width: fit-content;
-            background-color: lightblue;
-            margin: 10px 10px;
+            align-items: center;
+            background-color: rgba(255, 255, 255, 0.9);
+            padding: 20px;
+            border-radius: 15px;
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+            max-width: 350px;
+            width: 100%;
+        }
+
+        /* Input field styling */
+        .user {
+            width: 100%;
             padding: 10px;
-            row-gap: 10px;
+            border: 1px solid #2980b9;
+            border-radius: 5px;
+            font-size: 16px;
+            outline: none;
+            transition: 0.3s ease;
         }
-        .user::placeholder {
-            color: rgb(227, 21, 21);
-            opacity: 0.3;
+
+        .user:hover, .user:focus {
+            border-color: #1abc9c;
+            box-shadow: 0 0 5px rgba(26, 188, 156, 0.5);
         }
+
+        /* Button styling */
+        #btn {
+            margin-top: 15px;
+            padding: 10px 15px;
+            background-color: #2980b9;
+            border: none;
+            color: white;
+            font-size: 16px;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: 0.3s ease;
+        }
+
+        #btn:hover {
+            background-color: #1abc9c;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+        }
+
+        /* Result message styling */
+        .result {
+            margin-top: 15px;
+            font-size: 18px;
+            color: #2980b9;
+            font-weight: bold;
+        }
+
     </style>
 </head>
 <body>
     <div class="main">
-        <input class="user" type="date" placeholder="Enter Date"> <!-- Changed to 'date' input -->
-        <input class="output" type="text" readonly> <!-- Added 'readonly' to prevent user input -->
+        <input class="user" type="date" placeholder="Enter Date">
         <button id="btn">Calculate</button>
+        <p class="result"></p> <!-- Element to display the result -->
     </div>
-    <script>
-        let element = document.getElementById("btn");
-element.addEventListener("click", calculateDifference);
-
-function calculateDifference() {
-    const givenDate = document.getElementsByClassName("user")[0].value; // Access the value of the input
-    const currentDate = new Date();
-    const pastDate = new Date(givenDate);
-    
-    let years = currentDate.getFullYear() - pastDate.getFullYear();
-    let months = currentDate.getMonth() - pastDate.getMonth();
-    let days = currentDate.getDate() - pastDate.getDate(); // Use getDate() for day of the month
-
-    if (days < 0) {
-        months--;
-        days += new Date(currentDate.getFullYear(), currentDate.getMonth(), 0).getDate(); // Adjust for days in the month
-    }
-    if (months < 0) {
-        years--;
-        months += 12;
-    }
-
-    let result = {
-        years: years,
-        months: months,
-        days: days
-    };
-
-    let output = document.getElementsByClassName("output")[0];
-    output.value = `Years: ${result.years}, Months: ${result.months}, Days: ${result.days}`; // Use 'value' instead of 'innerHTML'
-}
-
-    </script>
+    <script src="source.js"></script>
 </body>
 </html>
