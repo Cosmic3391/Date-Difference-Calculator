@@ -27,5 +27,5 @@ function calculateDifference() {
 
     // Display the result in the paragraph element
     let outputElement = document.getElementsByClassName("result")[0];
-    outputElement.textContent = `Years: ${result.years}, Months: ${result.months}, Days: ${result.days}`;
+    outputElement.textContent = `Years: ${result.years} Months: ${result.months} Days: ${result.days}`;
 }
