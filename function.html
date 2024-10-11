@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Date Difference Calculator</title>
+    <style>
+        .main {
+            display: flex;
+            flex-direction: column;
+            max-width: fit-content;
+            background-color: lightblue;
+            margin: 10px 10px;
+            padding: 10px;
+            row-gap: 10px;
+        }
+        .user::placeholder {
+            color: rgb(227, 21, 21);
+            opacity: 0.3;
+        }
+    </style>
+</head>
+<body>
+    <div class="main">
+        <input class="user" type="date" placeholder="Enter Date"> <!-- Changed to 'date' input -->
+        <input class="output" type="text" readonly> <!-- Added 'readonly' to prevent user input -->
+        <button id="btn">Calculate</button>
+    </div>
+    <script>
+        let element = document.getElementById("btn");
+element.addEventListener("click", calculateDifference);
+
+function calculateDifference() {
+    const givenDate = document.getElementsByClassName("user")[0].value; // Access the value of the input
+    const currentDate = new Date();
+    const pastDate = new Date(givenDate);
+    
+    let years = currentDate.getFullYear() - pastDate.getFullYear();
+    let months = currentDate.getMonth() - pastDate.getMonth();
+    let days = currentDate.getDate() - pastDate.getDate(); // Use getDate() for day of the month
+
+    if (days < 0) {
+        months--;
+        days += new Date(currentDate.getFullYear(), currentDate.getMonth(), 0).getDate(); // Adjust for days in the month
+    }
+    if (months < 0) {
+        years--;
+        months += 12;
+    }
+
+    let result = {
+        years: years,
+        months: months,
+        days: days
+    };
+
+    let output = document.getElementsByClassName("output")[0];
+    output.value = `Years: ${result.years}, Months: ${result.months}, Days: ${result.days}`; // Use 'value' instead of 'innerHTML'
+}
+
+    </script>
+</body>
+</html>
